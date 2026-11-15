@@ -3,7 +3,7 @@ from pathlib import Path
 class Settings:
 
     def __init__(self):
-        self.name: str = "Alien Invasion"
+        self.name: str = "Graveyard Shift"
         self.screen_w = 1300
         self.screen_h = 800
         self.FPS = 60
@@ -16,8 +16,9 @@ class Settings:
         self.ship_h = 90
 
         self.bullet_file = Path.cwd() / "Assets" / "Images" / "laserBlast.png"
-        self.laser_sound = Path.cwd() / "Assets" / "sound" / "laser.mp3"
-        self.impact_sound = Path.cwd() / "Assets" / "sound" / "impactSound.mp3"
+        self.laser_sound = Path.cwd() / "Assets" / "sound" / "pew.mp3"
+        self.impact_sound = Path.cwd() / "Assets" / "sound" / "pop.mp3"
+        
 
         self.alien_file = Path.cwd() / 'Assets' / 'images' / 'bat.png'
         self.alien_w = 40
