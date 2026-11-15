@@ -30,9 +30,9 @@ class Settings:
         self.button_color = (0, 0, 0)
 
         self.text_color = (255, 255, 255)
-        self.button_font_size = 48
-        self.HUD_font_size = 20
-        self.font_file = Path.cwd() / 'Assets' / 'Fonts' / 'Silkscreen' / 'Silkscreen-Bold.ttf'
+        self.button_font_size = 45
+        self.HUD_font_size = 25
+        self.font_file = Path.cwd() / 'Assets' / 'Fonts' / 'New_Rocker' / 'NewRocker-Regular.ttf'
 
 
     def initialize_dynamic_settings(self):
