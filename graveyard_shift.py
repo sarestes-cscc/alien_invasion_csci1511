@@ -2,15 +2,15 @@ import sys
 import pygame
 from settings import Settings
 from game_stats import GameStats
-from ship import Ship
+from cat import Cat
 from arsenal import Arsenal
-# from alien import Alien
-from alien_fleet import AlienFleet
+# from bat import Bat
+from bat_fleet import BatFleet
 from time import sleep
 from button import Button
 from hud import HUD
 
-class AlienInvasion:
+class GraveYardShift:
 
     def __init__(self):
         pygame.init()
@@ -40,9 +40,9 @@ class AlienInvasion:
         self.impact_sound.set_volume(0.7)
 
 
-        self.ship = Ship(self, Arsenal(self))
-        self.alien_fleet = AlienFleet(self)
-        self.alien_fleet.create_fleet()
+        self.cat = Cat(self, Arsenal(self))
+        self.bat_fleet = BatFleet(self)
+        self.bat_fleet.create_fleet()
 
         self.play_button = Button(self, 'Play')
         self.game_active = False
@@ -53,32 +53,32 @@ class AlienInvasion:
         while self.running:
             self._check_events()
             if self.game_active:
-                self.ship.update()
-                self.alien_fleet.update_fleet()
+                self.cat.update()
+                self.bat_fleet.update_fleet()
                 self._check_collisions()
             self._update_screen()
             self.clock.tick(self.settings.FPS)
 
 
     def _check_collisions(self):
-        # check collisions for ship
-        if self.ship.check_collisions(self.alien_fleet.fleet):
+        # check collisions for cat
+        if self.cat.check_collisions(self.bat_fleet.fleet):
             self._check_game_status()
             # subtract one life if possible
 
-        # check collisions for aliens and bottom of screen
-        if self.alien_fleet.check_fleet_bottom():
+        # check collisions for bats and bottom of screen
+        if self.bat_fleet.check_fleet_bottom():
             self._check_game_status()
        
-        # check collisions of projectiles and aliens
-        collisions = self.alien_fleet.check_collisions(self.ship.arsenal.arsenal)
+        # check collisions of projectiles and bats
+        collisions = self.bat_fleet.check_collisions(self.cat.arsenal.arsenal)
         if collisions:
             self.impact_sound.play()
             self.impact_sound.fadeout(500)
             self.game_stats.update(collisions)
             self.HUD.update_scores()
 
-        if self.alien_fleet.check_destroyed_status():
+        if self.bat_fleet.check_destroyed_status():
             self._reset_level()
             self.settings.increase_difficulty()
             # udpate game stats level
@@ -88,8 +88,8 @@ class AlienInvasion:
 
 
     def _check_game_status(self):
-        if self.game_stats.ships_left > 0:
-            self.game_stats.ships_left -= 1
+        if self.game_stats.cats_left > 0:
+            self.game_stats.cats_left -= 1
             self._reset_level()
             sleep(0.5)
         else:
@@ -97,9 +97,9 @@ class AlienInvasion:
 
 
     def _reset_level(self):
-        self.ship.arsenal.arsenal.empty()
-        self.alien_fleet.fleet.empty()
-        self.alien_fleet.create_fleet()
+        self.cat.arsenal.arsenal.empty()
+        self.bat_fleet.fleet.empty()
+        self.bat_fleet.create_fleet()
 
 
     def restart_game(self):
@@ -107,15 +107,15 @@ class AlienInvasion:
         self.game_stats.reset_stats()
         self.HUD.update_scores()
         self._reset_level()
-        self.ship._center_ship()
+        self.cat._center_cat()
         self.game_active = True
         pygame.mouse.set_visible(False)
 
 
     def _update_screen(self):
         self.screen.blit(self.bg, (0,0))
-        self.ship.draw()
-        self.alien_fleet.draw()
+        self.cat.draw()
+        self.bat_fleet.draw()
         self.HUD.draw()
 
         if not self.game_active:
@@ -148,18 +148,18 @@ class AlienInvasion:
 
     def _check_keyup_events(self, event):
         if event.key == pygame.K_RIGHT:
-            self.ship.moving_right = False
+            self.cat.moving_right = False
         elif event.key == pygame.K_LEFT:
-            self.ship.moving_left = False
+            self.cat.moving_left = False
 
 
     def _check_keydown_events(self, event):
         if event.key == pygame.K_RIGHT:
-            self.ship.moving_right = True
+            self.cat.moving_right = True
         elif event.key == pygame.K_LEFT:
-            self.ship.moving_left = True
+            self.cat.moving_left = True
         elif event.key == pygame.K_SPACE:
-            if self.ship.fire():
+            if self.cat.fire():
                 self.laser_sound.play()
                 # self.laser_sound.fadeout(250)
 
@@ -170,5 +170,5 @@ class AlienInvasion:
             sys.exit()   
 
 if __name__ == '__main__':
-    ai = AlienInvasion()
+    ai = GraveYardShift()
     ai.run_game()

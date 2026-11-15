@@ -3,11 +3,11 @@ from pygame.sprite import Sprite
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from alien_invasion import AlienInvasion
+    from graveyard_shift import GraveYardShift
 
 
 class Bullet(Sprite):
-    def __init__(self, game: 'AlienInvasion'):
+    def __init__(self, game: 'GraveYardShift'):
         super().__init__()
         
         self.screen = game.screen
@@ -19,7 +19,7 @@ class Bullet(Sprite):
             )
         
         self.rect = self.image.get_rect()
-        self.rect.midtop = game.ship.rect.midtop
+        self.rect.midtop = game.cat.rect.midtop
         self.y = float(self.rect.y)
 
     def update(self):

@@ -11,18 +11,18 @@ class Settings:
         self.difficulty_scale = 1.1
         self.scores_file = Path.cwd() / "Assets" / "file" / "scores.json"
 
-        self.ship_file = Path.cwd() / "Assets" / "Images" / "cat.png"
-        self.ship_w = 70
-        self.ship_h = 90
+        self.cat_file = Path.cwd() / "Assets" / "Images" / "cat.png"
+        self.cat_w = 70
+        self.cat_h = 90
 
         self.bullet_file = Path.cwd() / "Assets" / "Images" / "laserBlast.png"
         self.laser_sound = Path.cwd() / "Assets" / "sound" / "pew.mp3"
         self.impact_sound = Path.cwd() / "Assets" / "sound" / "pop.mp3"
         
 
-        self.alien_file = Path.cwd() / 'Assets' / 'images' / 'bat.png'
-        self.alien_w = 40
-        self.alien_h = 30
+        self.bat_file = Path.cwd() / 'Assets' / 'images' / 'bat.png'
+        self.bat_w = 40
+        self.bat_h = 30
         self.fleet_direction = 1
 
         self.button_w = 200
@@ -36,8 +36,8 @@ class Settings:
 
 
     def initialize_dynamic_settings(self):
-        self.ship_speed = 5
-        self.starting_ship_count = 3
+        self.cat_speed = 5
+        self.starting_cat_count = 3
 
         self.bullet_w = 25
         self.bullet_h = 80
@@ -46,10 +46,10 @@ class Settings:
 
         self.fleet_speed = 2
         self.fleet_drop_speed = 30
-        self.alien_points = 50
+        self.bat_points = 50
 
 
     def increase_difficulty(self):
-        self.ship_speed *= self.difficulty_scale
+        self.cat_speed *= self.difficulty_scale
         self.bullet_speed *= self.difficulty_scale
         self.fleet_speed *= self.difficulty_scale

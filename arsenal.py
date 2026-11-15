@@ -4,11 +4,11 @@ from typing import TYPE_CHECKING
 
 
 if TYPE_CHECKING:
-    from alien_invasion import AlienInvasion
+    from graveyard_shift import GraveYardShift
 
 
 class Arsenal:
-    def __init__(self, game: 'AlienInvasion'):
+    def __init__(self, game: 'GraveYardShift'):
         self.game = game
         self.settings = game.settings
         self.arsenal = pygame.sprite.Group()

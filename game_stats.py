@@ -4,11 +4,11 @@ import json
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from alien_invasion import AlienInvasion
+    from graveyard_shift import GraveYardShift
 
 class GameStats:
 
-    def __init__(self, game: 'AlienInvasion'):
+    def __init__(self, game: 'GraveYardShift'):
         self.game = game
         self.settings = game.settings
         self.max_score = 0
@@ -40,7 +40,7 @@ class GameStats:
 
 
     def reset_stats(self):
-        self.ships_left = self.settings.starting_ship_count
+        self.cats_left = self.settings.starting_cat_count
         self.score = 0
         self.level = 1
 
@@ -55,8 +55,8 @@ class GameStats:
 
 
     def _update_score(self, collisions):
-        for alien in collisions.values():
-            self.score += self.settings.alien_points
+        for bat in collisions.values():
+            self.score += self.settings.bat_points
         # print(f"Basic: {self.score}")
 
 

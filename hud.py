@@ -2,7 +2,7 @@ import pygame.font
 # from typing import TYPE_CHECKING
 
 # if TYPE_CHECKING:
-# from alien_invasion import AlienInvasion
+# from graveyard_shift import GraveYardShift
 
 class HUD:
 
@@ -21,9 +21,9 @@ class HUD:
 
 
     def _setup_life_image(self):
-        self.life_image = pygame.image.load(self.settings.ship_file)
+        self.life_image = pygame.image.load(self.settings.cat_file)
         self.life_image = pygame.transform.scale(self.life_image, (
-            self.settings.ship_w, self.settings.ship_h
+            self.settings.cat_w, self.settings.cat_h
             ))
         self.life_rect = self.life_image.get_rect()
 
@@ -72,7 +72,7 @@ class HUD:
     def _draw_lives(self):
         current_x = self.padding
         current_y = self.padding
-        for _ in range(self.game_stats.ships_left):
+        for _ in range(self.game_stats.cats_left):
             self.screen.blit(self.life_image, (current_x, current_y))
             current_x += self.life_rect.width + self.padding
 
