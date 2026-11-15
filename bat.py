@@ -1,3 +1,11 @@
+"""
+    GraveYard Shift
+    Sarah Estes
+    Drawing bats to the screen and movement
+    11/15/2026 
+"""
+
+
 import pygame
 from pygame.sprite import Sprite
 from typing import TYPE_CHECKING
@@ -7,7 +15,9 @@ if TYPE_CHECKING:
 
 
 class Bat(Sprite):
+    """Represents a single bat in the fleet"""
     def __init__(self, fleet: 'BatFleet', x: float, y: float):
+        """Initialize the bat and set its starting position"""
         super().__init__()
         self.fleet = fleet
         self.screen = fleet.game.screen
@@ -28,6 +38,7 @@ class Bat(Sprite):
 
 
     def update(self):
+        """Set the speed and move the alien left or right"""
         temp_speed = self.settings.fleet_speed
 
         self.x += temp_speed * self.fleet.fleet_direction
@@ -36,10 +47,12 @@ class Bat(Sprite):
 
 
     def check_edges(self):
+        """Return True if alien is at edge of screen"""
         return (self.rect.right >= self.boundaries.right or self.rect.left <= self.boundaries.left)
     
 
     def draw_bat(self):
+        """Draws a bat to the screen"""
         self.screen.blit(self.image, self.rect)
 
         

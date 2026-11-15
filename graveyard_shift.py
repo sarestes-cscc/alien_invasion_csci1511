@@ -1,3 +1,11 @@
+"""
+    GraveYard Shift
+    Sarah Estes
+    Main game file and logic
+    11/15/2026 
+"""
+
+
 import sys
 import pygame
 from settings import Settings
@@ -11,8 +19,9 @@ from button import Button
 from hud import HUD
 
 class GraveYardShift:
-
+    """Main logic for GraveYard Shift"""
     def __init__(self):
+        """Initialize the game and create game resources"""
         pygame.init()
         self.settings = Settings()
         self.settings.initialize_dynamic_settings()
@@ -49,7 +58,7 @@ class GraveYardShift:
 
 
     def run_game(self):
-        # Game loop
+        """Start the main loop for the game"""
         while self.running:
             self._check_events()
             if self.game_active:
@@ -61,7 +70,7 @@ class GraveYardShift:
 
 
     def _check_collisions(self):
-        # check collisions for cat
+        """Checks cat, bat, and laser collisions"""
         if self.cat.check_collisions(self.bat_fleet.fleet):
             self._check_game_status()
             # subtract one life if possible
@@ -88,6 +97,7 @@ class GraveYardShift:
 
 
     def _check_game_status(self):
+        """Checks status and ends game if no lives left"""
         if self.game_stats.cats_left > 0:
             self.game_stats.cats_left -= 1
             self._reset_level()
@@ -97,12 +107,14 @@ class GraveYardShift:
 
 
     def _reset_level(self):
+        """Resets level once all lives are lost"""
         self.cat.arsenal.arsenal.empty()
         self.bat_fleet.fleet.empty()
         self.bat_fleet.create_fleet()
 
 
     def restart_game(self):
+        """Restart game once all lives are lost"""
         self.settings.initialize_dynamic_settings()
         self.game_stats.reset_stats()
         self.HUD.update_scores()
@@ -113,6 +125,7 @@ class GraveYardShift:
 
 
     def _update_screen(self):
+        """Updates screen and draws assets and HUD"""
         self.screen.blit(self.bg, (0,0))
         self.cat.draw()
         self.bat_fleet.draw()
@@ -126,6 +139,7 @@ class GraveYardShift:
 
 
     def _check_events(self):
+        """Check player events"""
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.running = False
@@ -141,12 +155,14 @@ class GraveYardShift:
 
 
     def _check_button_clicked(self):
+        """Check is start button is clicked"""
         mouse_pos = pygame.mouse.get_pos()
         if self.play_button.check_clicked(mouse_pos):
             self.restart_game()
 
 
     def _check_keyup_events(self, event):
+        """Prevents cat from moving if not clicking l/r arrows"""
         if event.key == pygame.K_RIGHT:
             self.cat.moving_right = False
         elif event.key == pygame.K_LEFT:
@@ -154,6 +170,7 @@ class GraveYardShift:
 
 
     def _check_keydown_events(self, event):
+        """Makes cat move if clicking l/r arrows"""
         if event.key == pygame.K_RIGHT:
             self.cat.moving_right = True
         elif event.key == pygame.K_LEFT:
@@ -170,5 +187,6 @@ class GraveYardShift:
             sys.exit()   
 
 if __name__ == '__main__':
+    """Game instance"""
     ai = GraveYardShift()
     ai.run_game()

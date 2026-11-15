@@ -1,8 +1,17 @@
+"""
+    GraveYard Shift
+    Sarah Estes
+    Houses settings for Graveyard Shift
+    11/15/2026 
+"""
+
+
 from pathlib import Path
 
 class Settings:
-
+    """Holds all static settings"""
     def __init__(self):
+        """"Initialize settings and create assets"""
         self.name: str = "Graveyard Shift"
         self.screen_w = 1300
         self.screen_h = 800
@@ -36,6 +45,7 @@ class Settings:
 
 
     def initialize_dynamic_settings(self):
+        """Initializing dynamic settings"""
         self.cat_speed = 5
         self.starting_cat_count = 3
 
@@ -50,6 +60,7 @@ class Settings:
 
 
     def increase_difficulty(self):
+        """Level up difficulty increase equations"""
         self.cat_speed *= self.difficulty_scale
         self.bullet_speed *= self.difficulty_scale
         self.fleet_speed *= self.difficulty_scale

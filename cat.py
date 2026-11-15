@@ -1,3 +1,11 @@
+"""
+    GraveYard Shift
+    Sarah Estes
+    Updates and controls for cat
+    11/15/2026 
+"""
+
+
 import pygame
 from typing import TYPE_CHECKING
 
@@ -7,8 +15,9 @@ if TYPE_CHECKING:
 
 
 class Cat:
-
+    """Manages the cat"""
     def __init__(self, game: 'GraveYardShift', arsenal: 'Arsenal'):
+        """Initialize the cat and set its starting position"""
         self.game = game
         self.settings = game.settings
         self.screen = game.screen
@@ -27,17 +36,19 @@ class Cat:
         self.arsenal = arsenal
 
     def _center_cat(self):
+        """Center the cat on the screen"""
         self.rect.midbottom = self.boundaries.midbottom
         self.x = float(self.rect.x)
 
 
     def update(self):
+        """Update the cat's position based on the movement flag"""
         self._update_cat_movement()
         self.arsenal.update_arsenal()
 
 
     def _update_cat_movement(self):
-        # updating the position of the cat
+        """Updating the position of the cat"""
         temp_speed = self.settings.cat_speed
         if self.moving_right and self.rect.right < self.boundaries.right:
             self.x += temp_speed
@@ -48,15 +59,18 @@ class Cat:
 
 
     def draw(self):
+        """Draws the cat to the screen"""
         self.arsenal.draw()
         self.screen.blit(self.image, self.rect)
 
 
     def fire(self):
+        """Fires a bullet from cat's current position"""
         return self.arsenal.fire_bullet()
 
 
     def check_collisions(self, other_group):
+        """Checks for collisions with Cat"""
         if pygame.sprite.spritecollideany(self, other_group):
             self._center_cat()
             return True

@@ -1,3 +1,11 @@
+"""
+    GraveYard Shift
+    Sarah Estes
+    Main controls for the HUD and drawing game stats to screen
+    11/15/2026 
+"""
+
+
 import pygame.font
 # from typing import TYPE_CHECKING
 
@@ -5,8 +13,9 @@ import pygame.font
 # from graveyard_shift import GraveYardShift
 
 class HUD:
-
+    """Manages HUD assets"""
     def __init__(self, game):
+        """Initalize HUD settings"""
         self.game = game
         self.settings = game.settings
         self.screen = game.screen
@@ -21,6 +30,7 @@ class HUD:
 
 
     def _setup_life_image(self):
+        """Creates life images to use when drawn to screen"""
         self.life_image = pygame.image.load(self.settings.cat_file)
         self.life_image = pygame.transform.scale(self.life_image, (
             self.settings.cat_w, self.settings.cat_h
@@ -29,12 +39,14 @@ class HUD:
 
 
     def update_scores(self):
+        """Updates all scores"""
         self._update_max_score()
         self._update_score()
         self._update_hi_score()
 
 
     def _update_score(self):
+        """Score HUD styling"""
         score_str = f"Score: {self.game_stats.score: ,.0f}"
         self.score_image = self.font.render(score_str, True, 
             self.settings.text_color, None)
@@ -44,6 +56,7 @@ class HUD:
 
 
     def _update_max_score(self):
+        """Max score HUD styling"""
         max_score_str = f"Max-Score: {self.game_stats.max_score: ,.0f}"
         self.max_score_image = self.font.render(max_score_str, True, 
             self.settings.text_color, None)
@@ -53,6 +66,7 @@ class HUD:
 
 
     def _update_hi_score(self):
+        """Hi-score HUD styling"""
         hi_score_str = f"Hi-Score: {self.game_stats.hi_score: ,.0f}"
         self.hi_score_image = self.font.render(hi_score_str, True, 
             self.settings.text_color, None)
@@ -61,6 +75,7 @@ class HUD:
 
 
     def update_level(self):
+        """Level udpate HUD styling"""
         level_str = f"Level: {self.game_stats.level: ,.0f}"
         self.level_image = self.font.render(level_str, True, 
             self.settings.text_color, None)
@@ -70,6 +85,7 @@ class HUD:
 
 
     def _draw_lives(self):
+        """Draws life images to screen"""
         current_x = self.padding
         current_y = self.padding
         for _ in range(self.game_stats.cats_left):
@@ -78,6 +94,7 @@ class HUD:
 
 
     def draw(self):
+        """Draws scores, level, and lives to screen"""
         self.screen.blit(self.hi_score_image, self.hi_score_rect)
         self.screen.blit(self.max_score_image, self.max_score_rect)
         self.screen.blit(self.score_image, self.score_rect)

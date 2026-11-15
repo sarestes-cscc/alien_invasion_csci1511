@@ -1,3 +1,11 @@
+"""
+    GraveYard Shift
+    Sarah Estes
+    Logic for bat fleet - drawing to screen and actions
+    11/15/2026 
+"""
+
+
 import pygame
 from typing import TYPE_CHECKING
 from bat import Bat
@@ -7,8 +15,9 @@ if TYPE_CHECKING:
     
 
 class BatFleet:
-
+    """Controls the bat fleet placement, movement, collisions"""
     def __init__(self, game: 'GraveYardShift'):
+        """Initializing bat fleet settings"""
         self.game = game
         self.settings = game.settings
         self.fleet = pygame.sprite.Group()
@@ -19,6 +28,7 @@ class BatFleet:
 
 
     def create_fleet(self):
+        """Create the fleet of bats"""
         bat_w = self.settings.bat_w
         bat_h = self.settings.bat_h
         screen_w = self.settings.screen_w
@@ -31,6 +41,7 @@ class BatFleet:
 
 
     def _create_rectangle_fleet(self, bat_w, bat_h, fleet_w, fleet_h, x_offset, y_offset):
+        """Create shape the fleet takes"""
         for row in range(fleet_h):
             for col in range(fleet_w):
                 current_x = bat_w * col + x_offset
@@ -41,6 +52,7 @@ class BatFleet:
 
 
     def calculate_offsets(self, bat_w, bat_h, screen_w, fleet_w, fleet_h):
+        """Calculates offset based on screensize"""
         half_screen = self.settings.screen_h//2
         fleet_horizontal_space = fleet_w * bat_w
         fleet_vertical_space = fleet_h * bat_h
@@ -51,6 +63,7 @@ class BatFleet:
 
 
     def calculate_fleet_size(self, bat_w, screen_w, bat_h, screen_h):
+        """Calculates size of fleet so they fill screen"""
         fleet_w = (screen_w//bat_w)
         fleet_h = ((screen_h / 2)//bat_h)
 
@@ -68,12 +81,14 @@ class BatFleet:
 
 
     def _create_bat(self, current_x: int, current_y: int):
+        """Creates a new bat and place in fleet"""
         new_bat = Bat(self, current_x, current_y)
 
         self.fleet.add(new_bat)
 
 
     def _check_fleet_edges(self):
+        """Bats respond to edges and stay on screen"""
         bat: Bat
         for bat in self.fleet:
             if bat.check_edges():
@@ -83,26 +98,31 @@ class BatFleet:
 
 
     def _drop_bat_fleet(self):
+        """Drop fleet"""
         for bat in self.fleet:
             bat.y += self.fleet_drop_speed
 
 
     def update_fleet(self):
+        """Updates fleet"""
         self._check_fleet_edges()
         self.fleet.update()
 
 
     def draw(self):
+        """Draws bat from Bat class"""
         bat: 'Bat'
         for bat in self.fleet:
             bat.draw_bat()
 
 
     def check_collisions(self, other_group):
+        """Fleet collision check"""
         return pygame.sprite.groupcollide(self.fleet, other_group, True, True)
 
 
     def check_fleet_bottom(self):
+        """Checks for bottom of screen collision"""
         bat: Bat
         for bat in self.fleet:
             if bat.rect.bottom >= self.settings.screen_h:
@@ -111,5 +131,6 @@ class BatFleet:
 
 
     def check_destroyed_status(self):
+        """Check if fleet is destroyed"""
         return not self.fleet
     
