@@ -24,10 +24,16 @@ class Bat(Sprite):
         self.boundaries = fleet.game.screen.get_rect()
         self.settings = fleet.game.settings
 
-        self.image = pygame.image.load(self.settings.bat_file)
-        self.image = pygame.transform.scale(self.image, 
+        self.image1 = pygame.image.load(self.settings.bat_up_file)
+        self.image2 = pygame.image.load(self.settings.bat_down_file)
+
+        self.image1 = pygame.transform.scale(self.image, 
             (self.settings.bat_w, self.settings.bat_h)
             )
+
+        self.image2 = pygame.transform.scale(self.image, 
+                    (self.settings.bat_w, self.settings.bat_h)
+                    )
         
         self.rect = self.image.get_rect()
         self.rect.x = x

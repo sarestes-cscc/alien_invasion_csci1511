@@ -29,7 +29,8 @@ class Settings:
         self.impact_sound = Path.cwd() / "Assets" / "sound" / "pop.mp3"
         
 
-        self.bat_file = Path.cwd() / 'Assets' / 'images' / 'bat.png'
+        self.bat_up_file = Path.cwd() / 'Assets' / 'images' / 'bat_up.png'
+        self.bat_down_file = Path.cwd() / 'Assets' / 'images' / 'bat_down.png'
         self.bat_w = 40
         self.bat_h = 30
         self.fleet_direction = 1
