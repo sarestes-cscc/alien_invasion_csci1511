@@ -27,14 +27,18 @@ class Bat(Sprite):
         self.image1 = pygame.image.load(self.settings.bat_up_file)
         self.image2 = pygame.image.load(self.settings.bat_down_file)
 
-        self.image1 = pygame.transform.scale(self.image, 
+        self.image1 = pygame.transform.scale(self.image1, 
             (self.settings.bat_w, self.settings.bat_h)
             )
-
-        self.image2 = pygame.transform.scale(self.image, 
+        self.image2 = pygame.transform.scale(self.image2, 
                     (self.settings.bat_w, self.settings.bat_h)
                     )
-        
+        self.image = self.image1
+
+        # Animation
+        self.current_frame = 0
+        self.animation_time = pygame.time.get_ticks()
+
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
@@ -44,12 +48,26 @@ class Bat(Sprite):
 
 
     def update(self):
-        """Set the speed and move the alien left or right"""
+        """Set the speed and move the alien left or right, update animation"""
         temp_speed = self.settings.fleet_speed
 
         self.x += temp_speed * self.fleet.fleet_direction
         self.rect.x = self.x
         self.rect.y = self.y
+
+        # Animation
+        current_time = pygame.time.get_ticks()
+
+        if current_time - self.animation_time >= 700:
+            self.animation_time = current_time
+
+            if self.current_frame == 0:
+                self.image = self.image2
+                self.current_frame = 1
+
+            else:
+                self.image = self.image1
+                self.current_frame = 0
 
 
     def check_edges(self):
