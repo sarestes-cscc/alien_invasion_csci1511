@@ -17,6 +17,7 @@ class Settings:
         self.screen_h = 800
         self.FPS = 60
         self.bg_file = Path.cwd() / "Assets" / "images" / "graveyard.png" 
+        self.bg_audio = Path.cwd() / "Assets" / "sound" / "spooky_background.mp3"
         self.difficulty_scale = 1.1
         self.scores_file = Path.cwd() / "Assets" / "file" / "scores.json"
 
@@ -26,7 +27,7 @@ class Settings:
 
         self.bullet_file = Path.cwd() / "Assets" / "Images" / "laserBlast.png"
         self.laser_sound = Path.cwd() / "Assets" / "sound" / "pew.mp3"
-        self.impact_sound = Path.cwd() / "Assets" / "sound" / "pop.mp3"
+        self.impact_sound = Path.cwd() / "Assets" / "sound" / "batScreech.mp3"
         
 
         self.bat_up_file = Path.cwd() / 'Assets' / 'images' / 'bat_up.png'

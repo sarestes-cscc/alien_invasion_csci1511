@@ -43,11 +43,13 @@ class GraveYardShift:
 
         pygame.mixer.init()
         self.laser_sound = pygame.mixer.Sound(self.settings.laser_sound)
-        self.laser_sound.set_volume(0.5)
+        self.laser_sound.set_volume(0.4)
 
         self.impact_sound = pygame.mixer.Sound(self.settings.impact_sound)
-        self.impact_sound.set_volume(0.7)
+        self.impact_sound.set_volume(0.6)
 
+        pygame.mixer.music.load(self.settings.bg_audio)
+        pygame.mixer.music.set_volume(0.25)
 
         self.cat = Cat(self, Arsenal(self))
         self.bat_fleet = BatFleet(self)
@@ -59,6 +61,7 @@ class GraveYardShift:
 
     def run_game(self):
         """Start the main loop for the game"""
+        pygame.mixer.music.play(-1)
         while self.running:
             self._check_events()
             if self.game_active:
