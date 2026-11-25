@@ -44,12 +44,12 @@ class BatFleet:
         """Create shape the fleet takes"""
         center_col = fleet_w // 2
         center_row = fleet_h // 2
-        
+
         for row in range(fleet_h):
             for col in range(fleet_w):
                 current_x = bat_w * col + x_offset
                 current_y = bat_h * row + y_offset
-                if col % 2 == 0 or row % 2 == 0:
+                if row == center_row or col == center_col:
                     continue
                 self._create_bat(current_x, current_y)
 
