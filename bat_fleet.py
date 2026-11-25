@@ -42,6 +42,9 @@ class BatFleet:
 
     def _create_rectangle_fleet(self, bat_w, bat_h, fleet_w, fleet_h, x_offset, y_offset):
         """Create shape the fleet takes"""
+        center_col = fleet_w // 2
+        center_row = fleet_h // 2
+        
         for row in range(fleet_h):
             for col in range(fleet_w):
                 current_x = bat_w * col + x_offset
