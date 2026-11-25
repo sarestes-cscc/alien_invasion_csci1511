@@ -37,10 +37,10 @@ class BatFleet:
         fleet_w, fleet_h = self.calculate_fleet_size(bat_w, screen_w, bat_h, screen_h)
         x_offset, y_offset = self.calculate_offsets(bat_w, bat_h, screen_w, fleet_w, fleet_h)
 
-        self._create_rectangle_fleet(bat_w, bat_h, fleet_w, fleet_h, x_offset, y_offset)
+        self._create_cross_fleet(bat_w, bat_h, fleet_w, fleet_h, x_offset, y_offset)
 
 
-    def _create_rectangle_fleet(self, bat_w, bat_h, fleet_w, fleet_h, x_offset, y_offset):
+    def _create_cross_fleet(self, bat_w, bat_h, fleet_w, fleet_h, x_offset, y_offset):
         """Create shape the fleet takes"""
         center_col = fleet_w // 2
         center_row = fleet_h // 2
