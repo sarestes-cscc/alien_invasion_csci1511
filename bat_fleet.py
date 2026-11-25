@@ -67,8 +67,8 @@ class BatFleet:
 
     def calculate_fleet_size(self, bat_w, screen_w, bat_h, screen_h):
         """Calculates size of fleet so they fill screen"""
-        fleet_w = (screen_w//bat_w)
-        fleet_h = ((screen_h / 2)//bat_h)
+        fleet_w = ((screen_w - (2 * bat_w)) // bat_w)
+        fleet_h = ((screen_h / 2)//bat_h) + 2
 
         if fleet_w % 2 == 0:
             fleet_w -= 1
