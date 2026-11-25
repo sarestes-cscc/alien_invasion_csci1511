@@ -49,9 +49,9 @@ class BatFleet:
             for col in range(fleet_w):
                 current_x = bat_w * col + x_offset
                 current_y = bat_h * row + y_offset
+                
                 if row == center_row or col == center_col:
-                    continue
-                self._create_bat(current_x, current_y)
+                    self._create_bat(current_x, current_y)
 
 
     def calculate_offsets(self, bat_w, bat_h, screen_w, fleet_w, fleet_h):
